@@ -74,9 +74,8 @@ export default {
     fetchMatchData() {
       axios.get('http://localhost:5000/matches')
           .then(response => {
-            const matches = response.data;
-            this.teams = [...new Set(matches.flatMap(match => [match.team1, match.team2]))];
-            this.venues = [...new Set(matches.map(match => match.venue))];
+            this.teams = response.data.teams;
+            this.venues = response.data.venues;
           })
           .catch(error => {
             console.error('Error fetching match data:', error);
