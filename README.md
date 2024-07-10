@@ -1,7 +1,7 @@
 # T20 International cricket match prediction Vue.js frontend
 
-### Overview 
-- **it a form that consists of the following fields**
+## Overview  
+- **the application consists of a form that consists of the following fields**
   - Team1
   - Team2
   - Venue
