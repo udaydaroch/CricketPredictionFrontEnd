@@ -19,7 +19,8 @@
         <div class="form-group">
           <label for="toss_winner">Toss Winner:</label>
           <select v-model="match.toss_winner">
-            <option v-for="team in teams" :key="team" :value="team">{{ team }}</option>
+            <option v-if="match.team1 && match.team2" :value="match.team1">{{ match.team1 }}</option>
+            <option v-if="match.team1 && match.team2" :value="match.team2">{{ match.team2 }}</option>
           </select>
         </div>
 
@@ -82,6 +83,12 @@ export default {
           });
     },
     predictOutcome() {
+      // Ensure team1 and team2 are different
+      if (this.match.team1 === this.match.team2) {
+        alert('Team 1 and Team 2 must be different.');
+        return;
+      }
+
       axios.post('http://localhost:5000/predict', this.match)
           .then(response => {
             this.prediction = response.data;
@@ -89,6 +96,22 @@ export default {
           .catch(error => {
             console.error('Error predicting outcome:', error);
           });
+    }
+  },
+  watch: {
+    'match.team1'(newTeam1) {
+      // Adjust team2 options based on team1 selection
+      if (newTeam1 === this.match.team2) {
+        this.match.team2 = '';
+      }
+    },
+    'match.team2'(newTeam2) {
+      // Ensure toss_winner is either team1 or team2
+      if (newTeam2 !== this.match.team1 && newTeam2 !== '') {
+        this.match.toss_winner = newTeam2;
+      } else {
+        this.match.toss_winner = this.match.team1;
+      }
     }
   }
 };
