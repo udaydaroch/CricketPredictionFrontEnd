@@ -100,18 +100,24 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
   color: #435d75;
-  margin-top: 60px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #b1c0ce;
+  margin: 0;
 }
 
 .card {
-  display: inline-block;
   background: #fff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 100%;
-  margin: auto;
+  min-width: 500px;
+  max-height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .form-group {
@@ -154,12 +160,5 @@ button:hover {
 p {
   font-size: 18px;
   margin: 0;
-}
-
-body {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f8f9fa;
 }
 </style>
